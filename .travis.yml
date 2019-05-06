@@ -5,8 +5,8 @@ language: groovy
 install: true
 
 script:
-  - ./gradlew :pandroid-plugin:uploadArchives -c settings-local.gradle
-  - ./gradlew :pandroid-plugin:test -c settings-local.gradle
+  - ./gradlew :gradle-junit-reports:uploadArchives -c settings-local.gradle
+  - ./gradlew :gradle-junit-reports:test -c settings-local.gradle
 
 jdk:
   - oraclejdk8

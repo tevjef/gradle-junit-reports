@@ -5,18 +5,20 @@ buildscript {
     mavenCentral()
   }
   dependencies {
-//    classpath 'me.tevinjeffrey:gradle-junit-reports:0.0.1'
+    classpath 'me.tevinjeffrey:gradle-junit-reports:0.0.1'
   }
 }
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: "io.gitlab.arturbosch.detekt"
+apply plugin: 'com.palantir.junit-reports'
 
 android {
   compileSdkVersion 27
   defaultConfig {
-    applicationId "com.prolificinteractive.pandroid"
+    applicationId "me.tevinjeffrey"
     minSdkVersion 23
     targetSdkVersion 27
     versionCode 1
@@ -25,7 +27,6 @@ android {
   }
 }
 
-//apply plugin: 'gradle-junit-reports'
 
 dependencies {
   implementation fileTree(dir: 'libs', include: ['*.jar'])

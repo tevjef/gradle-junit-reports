@@ -17,6 +17,8 @@ package com.palantir.gradle.junit;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import io.gitlab.arturbosch.detekt.Detekt;
 import org.gradle.api.Task;
 import org.gradle.api.plugins.quality.Checkstyle;
 import org.gradle.api.plugins.quality.FindBugs;
@@ -55,6 +57,6 @@ public final class StyleTaskTimer implements TaskTimer {
     }
 
     public static boolean isStyleTask(Task task) {
-        return task instanceof Checkstyle || task instanceof FindBugs || task instanceof JavaCompile;
+        return task instanceof Checkstyle || task instanceof FindBugs || task instanceof JavaCompile || task instanceof Detekt;
     }
 }

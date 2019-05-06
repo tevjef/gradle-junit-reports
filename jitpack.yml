@@ -1,5 +1,5 @@
 jdk:
   - oraclejdk8
 install:
-  - ./gradlew :pandroid-plugin:uploadArchives -c settings-local.gradle
-  - ./gradlew :pandroid-plugin:install -c settings-local.gradle
+  - ./gradlew :gradle-junit-reports:uploadArchives -c settings-local.gradle
+  - ./gradlew :gradle-junit-reports:install -c settings-local.gradle

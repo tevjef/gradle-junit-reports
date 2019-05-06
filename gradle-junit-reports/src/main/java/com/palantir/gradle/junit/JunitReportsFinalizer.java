@@ -43,6 +43,8 @@ public class JunitReportsFinalizer extends DefaultTask {
                 task.getProject().getTasks(),
                 task.getName() + "CircleFinalizer",
                 JunitReportsFinalizer.class);
+        System.out.println("Name: "+ task.getName());
+        System.out.println(finalizer);
         if (finalizer == null) {
             // Already registered (happens if the user applies us to the root project and subprojects)
             return;

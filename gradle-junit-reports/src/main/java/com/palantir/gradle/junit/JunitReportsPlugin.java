@@ -19,6 +19,8 @@ package com.palantir.gradle.junit;
 import com.google.common.base.Splitter;
 import java.io.File;
 import java.nio.file.Path;
+
+import io.gitlab.arturbosch.detekt.Detekt;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.file.Directory;
@@ -61,12 +63,18 @@ public final class JunitReportsPlugin implements Plugin<Project> {
                             timer,
                             XmlReportFailuresSupplier.create(checkstyle, new CheckstyleReportHandler()),
                             reportsExtension.getReportsDirectory().map(dir -> dir.dir("checkstyle"))));
-            proj.getTasks().withType(JavaCompile.class, javac ->
+//            proj.getTasks().withType(JavaCompile.class, javac ->
+//                    JunitReportsFinalizer.registerFinalizer(
+//                            javac,
+//                            timer,
+//                            JavacFailuresSupplier.create(javac),
+//                            reportsExtension.getReportsDirectory().map(dir -> dir.dir("javac"))));
+            proj.getTasks().withType(Detekt.class, detektTask ->
                     JunitReportsFinalizer.registerFinalizer(
-                            javac,
+                            detektTask,
                             timer,
-                            JavacFailuresSupplier.create(javac),
-                            reportsExtension.getReportsDirectory().map(dir -> dir.dir("javac"))));
+                            DetektReportFailuresSupplier.create(detektTask, new DetektReportHandler()),
+                            reportsExtension.getReportsDirectory().map(dir -> dir.dir("detekt"))));
         });
     }
 

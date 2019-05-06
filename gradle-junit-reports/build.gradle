@@ -1,22 +1,38 @@
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'maven'
+apply plugin: 'kotlin'
+apply plugin: 'kotlin-kapt'
 
 group = 'me.tevinjeffrey'
 version = '0.0.1'
 
+compileKotlin {
+  kotlinOptions {
+    jvmTarget = "1.8"
+  }
+}
+compileTestKotlin {
+  kotlinOptions {
+    jvmTarget = "1.8"
+  }
+}
+
 dependencies {
   implementation localGroovy()
   implementation gradleApi()
-  implementation 'com.google.guava:guava:27.1-android'
 
-  annotationProcessor 'org.inferred:freebuilder:2.3.0'
+  implementation 'com.google.guava:guava:27.1-android'
+  implementation 'io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.0.0-RC14'
+
+  kapt 'org.inferred:freebuilder:2.3.0'
   compileOnly 'org.inferred:freebuilder:2.3.0'
 
   testImplementation 'com.google.guava:guava:27.1-android'
   testImplementation 'junit:junit:4.12'
   testImplementation 'org.assertj:assertj-core:3.12.2'
   testImplementation 'org.mockito:mockito-core:2.27.0'
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.31"
 }
 
 uploadArchives {
