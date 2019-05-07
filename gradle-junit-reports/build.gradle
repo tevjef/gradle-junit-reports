@@ -22,14 +22,14 @@ dependencies {
   implementation localGroovy()
   implementation gradleApi()
 
-  implementation 'com.google.guava:guava:27.1-android'
+  implementation 'com.google.guava:guava:27.1-jre'
   implementation 'io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.0.0-RC14'
   implementation 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.31'
 
   kapt 'org.inferred:freebuilder:2.3.0'
   compileOnly 'org.inferred:freebuilder:2.3.0'
 
-  testImplementation 'com.google.guava:guava:27.1-android'
+  testImplementation 'com.google.guava:guava:27.1-jre'
   testImplementation 'junit:junit:4.12'
   testImplementation 'org.assertj:assertj-core:3.12.2'
   testImplementation 'org.mockito:mockito-core:2.27.0'
