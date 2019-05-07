@@ -101,6 +101,13 @@ class JunitReportsPlugin : Plugin<Project> {
             reportsExtension.reportsDirectory.map { dir -> dir.dir("ktlint") })
       }
 
+      proj.tasks.matching { AndroidLintUtils.isAndroidLintTask(it) }.whenTaskAdded { task ->
+        JunitReportsFinalizer.registerFinalizer(
+            task,
+            timer,
+            AndroidLintFailuresSupplier.create(task, null),
+            reportsExtension.reportsDirectory.map { dir -> dir.dir("android-lint") })
+      }
     }
   }
 

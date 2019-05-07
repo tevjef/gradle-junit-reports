@@ -51,7 +51,13 @@ class StyleTaskTimer : TaskTimer {
 
   companion object {
     fun isStyleTask(task: Task): Boolean {
-      return task is Checkstyle || task is FindBugs || task is JavaCompile || task is Detekt || KtlintUtils.isKtLintTask(task) || task is KotlinCompile
+      return task is Checkstyle ||
+          task is FindBugs ||
+          task is JavaCompile ||
+          task is Detekt ||
+          KtlintUtils.isKtLintTask(task) ||
+          task is KotlinCompile ||
+          AndroidLintUtils.isAndroidLintTask(task)
     }
   }
 }
