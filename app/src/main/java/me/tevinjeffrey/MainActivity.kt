@@ -8,7 +8,7 @@ class MainActivity : AppCompatActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentViesw(R.layout.activity_main)
+    setContentView(R.layout.activity_main)
   }
 
   fun a3_asda() {

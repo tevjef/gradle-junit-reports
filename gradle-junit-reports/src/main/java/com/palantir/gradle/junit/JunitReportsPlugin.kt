@@ -21,11 +21,12 @@ import io.gitlab.arturbosch.detekt.Detekt
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.file.Directory
-import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.plugins.quality.Checkstyle
 import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.JavaExec
+import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.api.tasks.testing.Test
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.io.File
 
 class JunitReportsPlugin : Plugin<Project> {
@@ -51,6 +52,7 @@ class JunitReportsPlugin : Plugin<Project> {
         test.reports.junitXml.setDestination(
             junitPath(reportsExtension.reportsDirectory, test.path))
       }
+
       proj.tasks.withType(Checkstyle::class.java) { checkstyle ->
         JunitReportsFinalizer.registerFinalizer(
             checkstyle,
@@ -58,12 +60,23 @@ class JunitReportsPlugin : Plugin<Project> {
             XmlReportFailuresSupplier.create(checkstyle, CheckstyleReportHandler()),
             reportsExtension.reportsDirectory.map { dir -> dir.dir("checkstyle") })
       }
-      //            proj.getTasks().withType(JavaCompile.class, javac ->
-      //                    JunitReportsFinalizer.registerFinalizer(
-      //                            javac,
-      //                            timer,
-      //                            JavacFailuresSupplier.create(javac),
-      //                            reportsExtension.getReportsDirectory().map(dir -> dir.dir("javac"))));
+
+      proj.tasks.withType(JavaCompile::class.java) { javac ->
+        JunitReportsFinalizer.registerFinalizer(
+            javac,
+            timer,
+            JavacFailuresSupplier.create(javac),
+            reportsExtension.reportsDirectory.map { dir -> dir.dir("javac") })
+      }
+
+      proj.tasks.withType(KotlinCompile::class.java) { kotlinc ->
+        JunitReportsFinalizer.registerFinalizer(
+            kotlinc,
+            timer,
+            KotlinFailuresSupplier.create(kotlinc),
+            reportsExtension.reportsDirectory.map { dir -> dir.dir("kotlinc") })
+      }
+
       proj.tasks.withType(Detekt::class.java) { detektTask ->
         JunitReportsFinalizer.registerFinalizer(
             detektTask,
@@ -71,6 +84,7 @@ class JunitReportsPlugin : Plugin<Project> {
             DetektReportFailuresSupplier.create(detektTask, DetektReportHandler()),
             reportsExtension.reportsDirectory.map { dir -> dir.dir("detekt") })
       }
+
       // Configure default ktlint installation: https://github.com/pinterest/ktlint#-with-gradle
       // TODO Configure for ktlint gradle plugins
       // https://github.com/jeremymailen/kotlinter-gradle

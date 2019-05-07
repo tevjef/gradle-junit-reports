@@ -24,6 +24,7 @@ dependencies {
 
   implementation 'com.google.guava:guava:27.1-android'
   implementation 'io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.0.0-RC14'
+  implementation 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.31'
 
   kapt 'org.inferred:freebuilder:2.3.0'
   compileOnly 'org.inferred:freebuilder:2.3.0'

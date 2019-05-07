@@ -23,6 +23,7 @@ import org.gradle.api.plugins.quality.Checkstyle
 import org.gradle.api.plugins.quality.FindBugs
 import org.gradle.api.tasks.TaskState
 import org.gradle.api.tasks.compile.JavaCompile
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 class StyleTaskTimer : TaskTimer {
 
@@ -50,7 +51,7 @@ class StyleTaskTimer : TaskTimer {
 
   companion object {
     fun isStyleTask(task: Task): Boolean {
-      return task is Checkstyle || task is FindBugs || task is JavaCompile || task is Detekt || KtlintUtils.isKtLintTask(task)
+      return task is Checkstyle || task is FindBugs || task is JavaCompile || task is Detekt || KtlintUtils.isKtLintTask(task) || task is KotlinCompile
     }
   }
 }
