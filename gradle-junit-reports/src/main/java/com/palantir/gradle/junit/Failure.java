@@ -19,7 +19,7 @@ import java.io.File;
 import org.inferred.freebuilder.FreeBuilder;
 
 @FreeBuilder
-interface Failure {
+public interface Failure {
 
     String source();
     File file();

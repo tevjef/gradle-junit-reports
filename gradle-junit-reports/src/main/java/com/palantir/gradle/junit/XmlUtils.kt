@@ -31,7 +31,7 @@ import org.xml.sax.InputSource
 import org.xml.sax.SAXException
 import org.xml.sax.XMLReader
 
-internal object XmlUtils {
+object XmlUtils {
 
   @Throws(IOException::class)
   @JvmStatic

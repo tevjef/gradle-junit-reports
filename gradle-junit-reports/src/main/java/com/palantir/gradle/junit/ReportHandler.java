@@ -22,7 +22,7 @@ import org.gradle.api.reporting.Reporting;
 import org.gradle.api.reporting.SingleFileReport;
 import org.xml.sax.helpers.DefaultHandler;
 
-abstract class ReportHandler<T extends Task>
+public abstract class ReportHandler<T extends Task>
         extends DefaultHandler {
     public abstract void configureTask(T task);
     public abstract List<Failure> failures();

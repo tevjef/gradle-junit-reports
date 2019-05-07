@@ -14,21 +14,14 @@
  * limitations under the License.
  */
 
-package com.palantir.gradle.junit;
+package com.palantir.gradle.junit
 
-import org.gradle.api.Project;
-import org.gradle.api.file.DirectoryProperty;
+import org.gradle.api.Project
+import org.gradle.api.file.Directory
+import org.gradle.api.file.DirectoryProperty
+import org.gradle.api.provider.Provider
 
-public class JunitReportsExtension {
-
-    private final DirectoryProperty reportsDirectory;
-
-    public JunitReportsExtension(Project project) {
-        this.reportsDirectory = project.getLayout().directoryProperty();
-        reportsDirectory.set(project.getLayout().getBuildDirectory().dir("junit-reports"));
-    }
-
-    public final DirectoryProperty getReportsDirectory() {
-        return reportsDirectory;
-    }
+open class JunitReportsExtension(private val project: Project) {
+  val reportsDirectory: Provider<Directory>
+    get() = project.layout.buildDirectory.dir("junit-reports")
 }

@@ -68,6 +68,6 @@ public final class BuildFailureListener implements TaskExecutionListener {
     }
 
     private static boolean isUntracked(Task task) {
-        return !(task instanceof Test) && !StyleTaskTimer.isStyleTask(task);
+        return !(task instanceof Test) && !StyleTaskTimer.Companion.isStyleTask(task);
     }
 }
