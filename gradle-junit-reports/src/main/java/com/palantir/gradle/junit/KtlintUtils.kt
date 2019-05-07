@@ -28,7 +28,7 @@ object KtlintUtils {
       return false
     }
     return (task.main == "com.pinterest.ktlint.Main" ||
-        task.main == "com.github.shyiko.Main") &&
+        task.main == "com.github.shyiko.ktlint.Main") &&
         !task.args.orEmpty().contains("-F") ||
         !task.args.orEmpty().contains("--format")
   }
