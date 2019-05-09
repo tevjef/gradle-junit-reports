@@ -20,7 +20,7 @@ import javax.annotation.Nullable;
 import org.inferred.freebuilder.FreeBuilder;
 
 @FreeBuilder
-interface Report {
+public interface Report {
 
     @FreeBuilder
     public interface Failure {

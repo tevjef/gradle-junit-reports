@@ -31,7 +31,7 @@ public final class FailuresReportGeneratorTests {
 
     @Test
     public void testNoErrors() {
-        Report report = failuresReport(
+        Report report = INSTANCE.failuresReport(
                 ROOT, "fooproject", "checkstyleTest", FAILED_CHECKSTYLE_TIME_NANOS, ImmutableList.<Failure>of());
         assertThat(report).isEqualTo(new Report.Builder()
                 .name("fooproject")
@@ -42,7 +42,7 @@ public final class FailuresReportGeneratorTests {
 
     @Test
     public void testTwoErrors() {
-        Report report = failuresReport(
+        Report report = INSTANCE.failuresReport(
                 ROOT, "fooproject", "checkstyleTest", FAILED_CHECKSTYLE_TIME_NANOS, CHECKSTYLE_FAILURES);
         assertThat(report).isEqualTo(REPORT);
     }
@@ -66,7 +66,7 @@ public final class FailuresReportGeneratorTests {
                         .details("\n        b = 2;                                                   "
                                         + "\n        ^                                                        ")
                         .build());
-        Report report = failuresReport(ROOT, "foobar", "compileJava", 293_000, failures);
+        Report report = INSTANCE.failuresReport(ROOT, "foobar", "compileJava", 293_000, failures);
         assertThat(report).isEqualTo(new Report.Builder()
                 .name("foobar")
                 .subname("compileJava")

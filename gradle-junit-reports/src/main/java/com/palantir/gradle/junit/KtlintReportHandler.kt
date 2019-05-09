@@ -15,7 +15,6 @@
  */
 package com.palantir.gradle.junit
 
-import org.gradle.api.Task
 import org.gradle.api.tasks.JavaExec
 import org.xml.sax.Attributes
 import java.io.File

@@ -13,27 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.palantir.gradle.junit;
+package com.palantir.gradle.junit
 
-import java.io.File;
-import org.inferred.freebuilder.FreeBuilder;
+import com.palantir.gradle.junit.TestCommon.testFile
+import com.palantir.gradle.junit.XmlUtils.parseXml
+import junit.framework.Assert.assertTrue
+import org.junit.Test
 
-@FreeBuilder
-public interface Failure {
+class AndroidLintReportHandlerTests {
 
-    String source();
-    File file();
-    int line();
-    int column();
-    String severity();
-    String message();
-    String details();
+  @Test
+  fun `test has errors`() {
+    val failures = parseXml(AndroidLintReportHandler(), testFile("lint-results-debug.xml").openStream())
+        .failures()
 
-    class Builder extends Failure_Builder {
-        Builder() {
-            source("");
-            details("");
-            column(1);
-        }
-    }
+    assertTrue(failures.size == 3)
+  }
 }

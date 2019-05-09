@@ -105,7 +105,7 @@ class JunitReportsPlugin : Plugin<Project> {
         JunitReportsFinalizer.registerFinalizer(
             task,
             timer,
-            AndroidLintFailuresSupplier.create(task, null),
+            AndroidLintFailuresSupplier.create(task, AndroidLintReportHandler()),
             reportsExtension.reportsDirectory.map { dir -> dir.dir("android-lint") })
       }
     }

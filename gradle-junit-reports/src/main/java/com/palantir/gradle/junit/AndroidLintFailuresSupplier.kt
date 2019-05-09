@@ -16,31 +16,30 @@
 package com.palantir.gradle.junit
 
 import org.gradle.api.Task
+import java.io.FileInputStream
 import java.io.IOException
 import java.nio.file.Path
 
 class AndroidLintFailuresSupplier private constructor(
     private val reporting: Task,
-    private val reportHandler: ReportHandler<Task>?) : FailuresSupplier {
+    private val reportHandler: ReportHandler<Task>) : FailuresSupplier {
 
   @Throws(IOException::class)
   override fun getFailures(): List<Failure> {
-    reporting.project.buildDir.toPath().resolve("reports").toFile().listFiles()
+    val report = reporting.project.buildDir.toPath().resolve("reports").toFile().listFiles()
         .filter { it.name.startsWith("lint-results") && it.name.endsWith("xml") }
-        .forEach { println(it) }
+        .firstOrNull()
 
-    return emptyList()
-//    return XmlUtils.parseXml(reportHandler, FileInputStream(sourceReport)).failures()
+    return XmlUtils.parseXml(reportHandler, FileInputStream(report)).failures()
   }
 
   override fun handleInternalFailure(reportDir: Path, ex: RuntimeException): RuntimeException {
-//    val report = reporting.xmlReportFile.orNull!!.asFile
     return ex
   }
 
   companion object {
 
-    fun create(task: Task, reportHandler: ReportHandler<Task>?): AndroidLintFailuresSupplier {
+    fun create(task: Task, reportHandler: ReportHandler<Task>): AndroidLintFailuresSupplier {
       return AndroidLintFailuresSupplier(task, reportHandler)
     }
   }
