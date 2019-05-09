@@ -38,7 +38,7 @@ You will need to execute the above command each time you make changes to it in o
 
     MIT License
     
-    Copyright (c) 2018 Prolific Interactive
+    Copyright (c) 2019 Tevin Jeffrey
     
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
