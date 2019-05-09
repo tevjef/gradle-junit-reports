@@ -45,6 +45,7 @@ public final class CheckstyleReportHandler extends ReportHandler<Checkstyle> {
                         .severity(attributes.getValue("severity").toUpperCase())
                         .file(file)
                         .line(Integer.parseInt(attributes.getValue("line")))
+                        .column(Integer.parseInt(attributes.getValue("column")))
                         .message(attributes.getValue("message"))
                         .build());
                 break;

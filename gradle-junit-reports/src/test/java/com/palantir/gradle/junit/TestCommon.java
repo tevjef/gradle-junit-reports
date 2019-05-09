@@ -36,6 +36,7 @@ public final class TestCommon {
                     .file(new File(
                             ROOT, CLASSFILE))
                     .line(135)
+                    .column(69)
                     .message(MESSAGE_1)
                     .build(),
             new Failure.Builder()
@@ -44,6 +45,7 @@ public final class TestCommon {
                     .file(new File(
                             ROOT, CLASSFILE))
                     .line(181)
+                    .column(56)
                     .message(MESSAGE_2)
                     .build());
     public static final long FAILED_CHECKSTYLE_TIME_NANOS = 321_000_000_000L;
@@ -52,20 +54,20 @@ public final class TestCommon {
             .subname("checkstyleTest")
             .elapsedTimeNanos(FAILED_CHECKSTYLE_TIME_NANOS)
             .addTestCases(new Report.TestCase.Builder()
-                    .name("ParameterNameCheck - org.example.server.FooApplication")
+                    .name("ParameterNameCheck - org.example.server.FooApplication:135:69")
                     .failure(new Report.Failure.Builder()
-                            .message("FooApplication.java:135: " + MESSAGE_1)
-                            .details("ERROR: " + MESSAGE_1 + "\n"
+                            .message("FooApplication.java:135:69 " + MESSAGE_1)
+                            .details("ERROR: " + MESSAGE_1 + "\n\n"
                                     + "Category: " + SOURCE + "\n"
                                     + "File: " + CLASSFILE + "\n"
                                     + "Line: 135\n")
                             .build())
                     .build())
             .addTestCases(new Report.TestCase.Builder()
-                    .name("ParameterNameCheck - org.example.server.FooApplication")
+                    .name("ParameterNameCheck - org.example.server.FooApplication:181:56")
                     .failure(new Report.Failure.Builder()
-                            .message("FooApplication.java:181: " + MESSAGE_2)
-                            .details("ERROR: " + MESSAGE_2 + "\n"
+                            .message("FooApplication.java:181:56 " + MESSAGE_2)
+                            .details("ERROR: " + MESSAGE_2 + "\n\n"
                                     + "Category: " + SOURCE + "\n"
                                     + "File: " + CLASSFILE + "\n"
                                     + "Line: 181\n")

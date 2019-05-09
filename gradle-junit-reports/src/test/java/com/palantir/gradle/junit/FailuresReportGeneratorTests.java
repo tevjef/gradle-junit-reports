@@ -31,7 +31,7 @@ public final class FailuresReportGeneratorTests {
 
     @Test
     public void testNoErrors() {
-        Report report = INSTANCE.failuresReport(
+        Report report = failuresReport(
                 ROOT, "fooproject", "checkstyleTest", FAILED_CHECKSTYLE_TIME_NANOS, ImmutableList.<Failure>of());
         assertThat(report).isEqualTo(new Report.Builder()
                 .name("fooproject")
@@ -42,7 +42,7 @@ public final class FailuresReportGeneratorTests {
 
     @Test
     public void testTwoErrors() {
-        Report report = INSTANCE.failuresReport(
+        Report report = failuresReport(
                 ROOT, "fooproject", "checkstyleTest", FAILED_CHECKSTYLE_TIME_NANOS, CHECKSTYLE_FAILURES);
         assertThat(report).isEqualTo(REPORT);
     }
@@ -66,29 +66,29 @@ public final class FailuresReportGeneratorTests {
                         .details("\n        b = 2;                                                   "
                                         + "\n        ^                                                        ")
                         .build());
-        Report report = INSTANCE.failuresReport(ROOT, "foobar", "compileJava", 293_000, failures);
+        Report report = failuresReport(ROOT, "foobar", "compileJava", 293_000, failures);
         assertThat(report).isEqualTo(new Report.Builder()
                 .name("foobar")
                 .subname("compileJava")
                 .elapsedTimeNanos(293_000)
                 .addTestCases(new Report.TestCase.Builder()
-                        .name("com.example.MyClass")
+                        .name("com.example.MyClass:8:1")
                         .failure(new Report.Failure.Builder()
-                                .message("MyClass.java:8: incompatible types: String cannot be converted to int")
+                                .message("MyClass.java:8:1 incompatible types: String cannot be converted to int")
                                 .details("ERROR: incompatible types: String cannot be converted to int\n"
                                         + "    private final int a = \"hello\";                               \n"
-                                        + "                          ^\n"
+                                        + "                          ^\n\n"
                                         + "File: src/main/java/com/example/MyClass.java\n"
                                         + "Line: 8\n")
                                 .build())
                         .build())
                 .addTestCases(new Report.TestCase.Builder()
-                        .name("com.example.MyClass")
+                        .name("com.example.MyClass:12:1")
                         .failure(new Report.Failure.Builder()
-                                .message("MyClass.java:12: cannot assign a value to final variable b")
+                                .message("MyClass.java:12:1 cannot assign a value to final variable b")
                                 .details("ERROR: cannot assign a value to final variable b\n"
                                         + "        b = 2;                                                   \n"
-                                        + "        ^                                                        \n"
+                                        + "        ^                                                        \n\n"
                                         + "File: src/main/java/com/example/MyClass.java\n"
                                         + "Line: 12\n")
                                 .build())
