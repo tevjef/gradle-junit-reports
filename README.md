@@ -1,12 +1,11 @@
-![Build Status](https://travis-ci.org/prolificinteractive/pandroid-gradle-plugin.svg?branch=master)
-![Version](https://jitpack.io/v/prolificinteractive/pandroid-gradle-plugin.svg)
-![License](https://img.shields.io/badge/license-Prolific_Interactive-blue.svg)
+![Build Status](https://travis-ci.org/tevjef/gradle-junit-reports.svg?branch=master)
+![Version](https://jitpack.io/v/tevjef/gradle-junit-reports.svg)
 
-![PAndroid Gradle Plugin](art/logo.png)
+![Junit Reports Gradle Plugin](art/logo.png)
 
 # Overview
 
-The PAndroid Gradle plugin allows all Prolific's Android project to run on our CI pipeline for different build variants.
+// TODO 
 
 # How to
 
@@ -18,12 +17,11 @@ buildscript {
     maven { url 'https://jitpack.io' }
   }
   dependencies {
-    classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.6.2"
-    classpath 'com.github.prolificinteractive:pandroid-gradle-plugin:<latest-version>'
+    classpath "TODO"
   }
 }
 
-apply plugin: 'pandroid'
+apply plugin: 'TODO'
 ```
 
 # Local Setup
@@ -35,79 +33,7 @@ $> make plugin
 ```
 
 You will need to execute the above command each time you make changes to it in order to get the latest changes applied to the application.
-
-# Builds
-
-This plugin will add four gradle tasks to your project:
-- `:alphaBuild`: build a hockey alpha build and outputs the apk to `ci/alpha.apk`
-- `:betaBuild`: build a hockey beta build and outputs the apk to `ci/beta.apk`
-- `:releaseBuild`: build a production build and outputs the apk to `ci/release.apk`
-- `:ciBuild`: runs all above tasks one after another.
-
-If the build task has proguard enabled, the mapping files will be moved to the ci folder under a sub-folder named following the apk's name.
-Here is an example of a ci folder after running a `ciBuild` with `beta` and `release` having proguard enabled:
-
-```
-ci
-|-- alpha.apk
-|-- beta
-|   |-- dump.txt
-|   |-- mapping.txt
-|   |-- seeds.txt
-|   `-- usage.txt
-|-- beta.apk
-|-- output.json
-|-- release
-|   |-- dump.txt
-|   |-- mapping.txt
-|   |-- seeds.txt
-|   `-- usage.txt
-`-- release.apk
-```
-
-# Configuration
-
-The PAndroid Gradle plugin will add the necessary tasks to the project but you still have to specify on which task they depend in your app's build.gradle:
-
-```groovy
-alphaBuild.dependsOn ':app:assembleDebug'
-betaBuild.dependsOn ':app:assembleBeta'
-releaseBuild.dependsOn ':app:assembleRelease'
-```
-
-These two properties define which product flavor and build type variant keiko will use to run Junit tests, Android Instrumentated tests and Android Lint.
-
-```groovy
-rootProject.ext {
-    keikoProductFlavor = "prod" // defaults to ''
-    keikoBuildType = "release" // defaults to release
-  }
-```
-
-This plugin also adds a `:bootstrap` task to fetch the keys from Dropbox. You can specify the path to the Dropbox folder as following:
-
-```groovy
-pandroid {
-  dropboxFolder = 'Hut/alpha'
-}
-```
-
-First of all, you need access to the dropbox folder used by this plugin. Follow this [link](https://www.dropbox.com/1/oauth2/authorize?client_id=bq8usftpqgqqhmn&response_type=token&redirect_uri=http://localhost) and authorize the application. Once given access, you should see the `access_token` in the url. Then export the access token to your environment variables:
-
-```bash
-export PANDROID_DROPBOX_TOKEN=<access_token>
-```
-
-And then run:
-
-```bash
-$> touch bootstrap.gradle
-$> ./gradlew bootstrap -c bootstrap.gradle
-```
-
-You need an empty settings file to avoid configuring the entire project which will fail as you do not have the keys yet after a fresh cloning.
-Note that the folder with the keys need to be in `/Applications/PAndroid Gradle Plugin/`
-
+ 
 ## License
 
     MIT License
